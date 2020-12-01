@@ -1,14 +1,21 @@
 using System;
 
-namespace garage
+namespace Garage
 {
-    public class Cessna : Vehicle // Propellor light aircraft
+    public class Cessna : Vehicle, IGasVehicle // Propellor light aircraft
     {
+        public Cessna()
+        {
+            CurrentTankPercentage = 0;
+        }
+
         public double FuelCapacity { get; set; }
+
+        public int CurrentTankPercentage { get; set; }
 
         public void RefuelTank()
         {
-            // method definition omitted
+            CurrentTankPercentage = 100;
         }
 
         public override void Drive()

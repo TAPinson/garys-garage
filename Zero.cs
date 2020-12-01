@@ -1,14 +1,22 @@
 using System;
 
-namespace garage
+namespace Garage
 {
-    public class Zero : Vehicle  // Electric motorcycle
+    public class Zero : Vehicle, IElectricVehicle  // Electric motorcycle
     {
+
+        public Zero()
+        {
+            CurrentChargePercentage = 0;
+        }
+
         public double BatteryKWh { get; set; }
+
+        public int CurrentChargePercentage { get; set; }
 
         public void ChargeBattery()
         {
-            // method definition omitted
+            CurrentChargePercentage = 100;
         }
 
         public override void Drive()

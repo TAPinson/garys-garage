@@ -1,56 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace garage
+namespace Garage
 {
     class Program
     {
         static void Main(string[] args)
         {
-            static void spacer()
+            Zero fxs = new Zero();
+            Zero fx = new Zero();
+            Tesla modelS = new Tesla();
+
+            List<IElectricVehicle> electricVehicles = new List<IElectricVehicle>() {
+                fx, fxs, modelS
+              };
+
+            Console.WriteLine("Electric Vehicles");
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                Console.WriteLine(" ");
+                Console.WriteLine($"{ev.CurrentChargePercentage}");
             }
 
-            Cessna myCessna = new Cessna()
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "blue",
-                MaximumOccupancy = 3
-            };
+                // This should charge the vehicle to 100%
+                ev.ChargeBattery();
+            }
 
-            Ram myRam = new Ram()
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Yellow",
-                MaximumOccupancy = 3
-            };
+                Console.WriteLine($"{ev.CurrentChargePercentage}");
+            }
 
-            Tesla myTesla = new Tesla()
+            /***********************************************/
+
+            Ram ram = new Ram();
+            Cessna cessna150 = new Cessna();
+
+            List<IGasVehicle> gasVehicles = new List<IGasVehicle>() {
+                ram, cessna150
+              };
+
+            Console.WriteLine("Gas Vehicles");
+            foreach (IGasVehicle gv in gasVehicles)
             {
-                MainColor = "Black",
-                MaximumOccupancy = 4
-            };
+                Console.WriteLine($"{gv.CurrentTankPercentage}");
+            }
 
-            Zero myZero = new Zero()
+            foreach (IGasVehicle gv in gasVehicles)
             {
-                MainColor = "Silver",
-                MaximumOccupancy = 2
-            };
+                // This should completely refuel the gas tank
+                gv.RefuelTank();
+            }
 
-            myCessna.Drive();
-            myCessna.Turn("left");
-            myCessna.Stop();
-            spacer();
-            myRam.Drive();
-            myRam.Turn("right");
-            myRam.Stop();
-            spacer();
-            myTesla.Drive();
-            myTesla.Turn("right");
-            myTesla.Stop();
-            spacer();
-            myZero.Drive();
-            myZero.Turn("left");
-            myZero.Stop();
-
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                Console.WriteLine($"{gv.CurrentTankPercentage}");
+            }
         }
     }
 }
